@@ -12,7 +12,7 @@ export default class ApiIner {
     this.positionHTML = null;
     this.page = 1;
     this.getHits = 0;
-    this.totalHits = 0;
+    this.totalHits = 1;
     this.onePage = 40;
   }
 
@@ -33,11 +33,11 @@ export default class ApiIner {
     this.positionHTML.innerHTML = ' ';
     this.page = 1;
     this.getHits = 0;
-    this.totalHits = 0;
+    this.totalHits = 1;
   }
   async axiosIMG() {
     const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.query}&per_page=${this.onePage}&page=${this.page}`;
-    
+
     return await axios
       .get(URL)
       .then(function (response) {
@@ -52,7 +52,6 @@ export default class ApiIner {
   }
   liteboxReflesh() {
     lightbox.refresh();
-   
   }
   pageincrement() {
     this.page += 1;
