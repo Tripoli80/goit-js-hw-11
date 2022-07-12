@@ -4,7 +4,7 @@
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-
+const throttle = require('lodash.throttle');
 const nowords = 'Qui timide rogat docet negare';
 const info = `Усьо, кіна не буде / We're sorry, but you've reached the end of search results.`;
 // import imageGellaryInner from './galeryBild';
@@ -139,8 +139,8 @@ function btnDisenable(btn) {
   }
 }
 
-window.addEventListener('scroll', checkPosition);
-window.addEventListener('resize', checkPosition);
+window.addEventListener('scroll', throttle(checkPosition, 300));
+window.addEventListener('resize', throttle(checkPosition, 300));
 
 function checkPosition(e) {
   // Нам потребуется знать высоту документа и высоту экрана:
