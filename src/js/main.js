@@ -59,6 +59,7 @@ function getNewCards({ hits, totalCount }) {
     Notify.info(info);
   } else {
     renderHTML(hits, myGallery.position);
+    myGallery.liteboxReflesh();
     if (myGallery.page === 1) {
       Notify.success(`Hooray! We found ${myGallery.totalHits} images.`);
       window.scrollBy({
