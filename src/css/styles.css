@@ -19,6 +19,8 @@ grid-template-columns: auto auto auto;
 }
 
 .gallery__item {
+  padding-left: 10px;
+  padding-right: 10px;
   width: 320px;
   display: block;
   position: relative;
@@ -39,7 +41,7 @@ grid-template-columns: auto auto auto;
 .gallery__image {
     display: block;
       height: 100%;
-      width: 100%;
+      width: calc(100% - 20px);
   object-fit:cover;
   /* width: 100%; */
   transition: transform var(--animation-duration) var(--timing-function);
@@ -70,4 +72,10 @@ grid-template-columns: auto auto auto;
 
 .none{
   visibility: hidden;
+}
+
+.info{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  text-align: center;
 }

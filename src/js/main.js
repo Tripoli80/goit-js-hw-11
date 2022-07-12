@@ -118,7 +118,7 @@ function createHTMLcard({
       <b>Comments: ${comments}</b>
     </p>
     <p class="info-item">
-      <b>Downloads:${downloads}</b>
+      <b>Downloads: ${downloads}</b>
     </p>
   </div>
   </div>`;
