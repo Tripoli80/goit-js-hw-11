@@ -35,10 +35,10 @@ export default class ApiIner {
     this.getHits = 0;
     this.totalHits = 0;
   }
-  axiosIMG() {
+  async axiosIMG() {
     const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.query}&per_page=${this.onePage}&page=${this.page}`;
     console.log(URL);
-    return axios
+    return await axios
       .get(URL)
       .then(function (response) {
         return {
