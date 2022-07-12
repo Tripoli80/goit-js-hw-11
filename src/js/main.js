@@ -69,7 +69,7 @@ function getNewCards({ hits, totalCount }) {
     if (myGallery.page === 1) {
       Notify.success(`Hooray! We found ${myGallery.totalHits} images.`);
       window.scrollBy({
-        top: 100,
+        top: 10,
         behavior: 'smooth',
       });
     } else {
@@ -87,7 +87,7 @@ function getNewCards({ hits, totalCount }) {
 
 function renderHTML(galleryItems, pointHTML) {
   myGallery.getHits += galleryItems.length;
- 
+
   pointHTML.insertAdjacentHTML(
     'beforeend',
     galleryItems.map(createHTMLcard).join('')
@@ -163,7 +163,7 @@ async function checkPosition(e) {
   const position = scrolled + screenHeight;
 
   if (position >= threshold) {
-     await loader(e);
+    await loader(e);
     // Если мы пересекли полосу-порог, вызываем нужное действие.
   }
 }
