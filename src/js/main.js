@@ -5,7 +5,8 @@ import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const throttle = require('lodash.throttle');
-const nowords = 'Qui timide rogat docet negare';
+
+const nowords = 'Ви щось нічого не написали....';
 const info = `Усьо, кіна не буде / We're sorry, but you've reached the end of search results.`;
 // import imageGellaryInner from './galeryBild';
 import ApiIner from './ApiIner';
@@ -86,7 +87,7 @@ function getNewCards({ hits, totalCount }) {
 
 function renderHTML(galleryItems, pointHTML) {
   myGallery.getHits += galleryItems.length;
-  console.log(myGallery.getHits);
+ 
   pointHTML.insertAdjacentHTML(
     'beforeend',
     galleryItems.map(createHTMLcard).join('')
@@ -142,7 +143,7 @@ function btnDisenable(btn) {
 window.addEventListener('scroll', throttle(checkPosition, 300));
 window.addEventListener('resize', throttle(checkPosition, 300));
 
-function checkPosition(e) {
+async function checkPosition(e) {
   // Нам потребуется знать высоту документа и высоту экрана:
   const height = document.body.offsetHeight;
   const screenHeight = window.innerHeight;
@@ -162,7 +163,7 @@ function checkPosition(e) {
   const position = scrolled + screenHeight;
 
   if (position >= threshold) {
-    loader(e);
+     await loader(e);
     // Если мы пересекли полосу-порог, вызываем нужное действие.
   }
 }
