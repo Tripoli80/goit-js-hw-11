@@ -10,3 +10,7 @@ export function saveSearchInput(evt) {
 export function updateSearchInput() {
   refs.input.value = localStorage.getItem(LOCALSTORAGE_KEY) || '';
 }
+
+export function  getSearchInput() {
+  return localStorage.getItem(LOCALSTORAGE_KEY) || '';
+}
