@@ -1,6 +1,6 @@
 const axios = require('axios').default;
 const API_KEY = '28552926-42791f44734bdc6e191538ce6';
-import { getSearchInput } from './APIlocalStorege';
+
 var lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   // captionsData: 'alt',
@@ -11,6 +11,9 @@ export default class ApiIner {
     this.searchQuery = '';
     this.positionHTML = null;
     this.page = 1;
+    this.getHits = 0;
+    this.totalHits = 0;
+    this.onePage = 40;
   }
 
   get query() {
@@ -19,60 +22,50 @@ export default class ApiIner {
   set query(newQuery) {
     this.searchQuery = newQuery;
   }
+
   get position() {
     return this.positionHTML;
   }
   set position(newPoint) {
     this.positionHTML = newPoint;
   }
-  resetPage() {
+  reset() {
     this.positionHTML.innerHTML = ' ';
     this.page = 1;
+    this.getHits = 0;
+    this.totalHits = 0;
   }
-  reset() {
-    console.log('fwefew', this.positionHTML);
-
-    this.positionHTML.innerHTML = '';
-  }
-  axiosIMG(evt) {
-    evt.preventDefault();
-    const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.query}&per_page=10&page=${this.page}`;
+  axiosIMG() {
+    const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.query}&per_page=${this.onePage}&page=${this.page}`;
     console.log(URL);
-    const point = this.position;
-    let result = [];
-    const search = axios
+    return axios
       .get(URL)
       .then(function (response) {
-        result = [...response.data.hits];
-        renderHTML(result, point);
+        return {
+          hits: [...response.data.hits],
+          totalCount: response.data.totalHits,
+        };
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    search.then(() => {
-      lightbox.refresh();
-      this.page += 1;
-    });
-    console.log(this.page);
   }
-}
+  liteboxReflesh() {
+    lightbox.refresh();
+    console.log(lightbox);
+  }
+  pageincrement() {
+    this.page += 1;
+  }
 
-function renderHTML(galleryItems, pointHTML) {
-  pointHTML.insertAdjacentHTML(
-    'beforeend',
-    galleryItems.map(createItemGalery).join('')
-  );
-}
-function createItemGalery({
-  previewURL,
-  largeImageURL,
-  comments,
-  views,
-  likes,
-  downloads,
-}) {
-  return `<a class="gallery__item" href=${largeImageURL}>  <img src="${previewURL}" alt="pic" height ="100%" loading="lazy" />  </a>
-
-`;
+  total(addToTotal) {
+    this.totalHits = addToTotal;
+  }
+  checkTotalHits() {
+    console.log(
+      `${this.totalHits}>= ${this.getHits}  = `,
+      this.totalHits >= this.getHits
+    );
+    return this.totalHits > this.getHits;
+  }
 }
