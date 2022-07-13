@@ -1,5 +1,6 @@
 const axios = require('axios').default;
 const API_KEY = '28552926-42791f44734bdc6e191538ce6';
+import SimpleLightbox from 'simplelightbox';
 
 var lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
@@ -34,6 +35,8 @@ export default class ApiIner {
     this.page = 1;
     this.getHits = 0;
     this.totalHits = 1;
+        
+        
   }
   async axiosIMG() {
     const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.query}&per_page=${this.onePage}&page=${this.page}`;
@@ -54,6 +57,7 @@ export default class ApiIner {
     lightbox.refresh();
   }
   pageincrement() {
+
     this.page += 1;
   }
 
